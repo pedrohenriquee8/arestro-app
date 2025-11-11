@@ -19,7 +19,7 @@ object HomeRoute
 fun ArestroNavHost(navController: NavHostController) {
     NavHost(navController = navController, startDestination = OnBoardingRoute) {
         composable<OnBoardingRoute> {
-            Layout(showAppBar = false) {
+            Layout {
                 OnBoardingScreen()
             }
         }
