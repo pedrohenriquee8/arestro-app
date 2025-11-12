@@ -16,6 +16,7 @@ import br.edu.ifal.aluno.arestro.model.contact.ContactTypeConverter
 
 abstract class DatabaseHelper : RoomDatabase() {
     abstract fun contactDao(): ContactDao
+    abstract fun userDao(): UserDao
 
     companion object {
         fun getInstance(context: Context): DatabaseHelper {

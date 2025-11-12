@@ -48,6 +48,7 @@ dependencies {
     implementation(libs.androidx.room.common.jvm)
 
     // Room
+    implementation(libs.androidx.compose.foundation)
     val room_version = "2.8.1"
     implementation("androidx.room:room-runtime:$room_version")
     // kapt
@@ -58,6 +59,7 @@ dependencies {
     implementation("androidx.compose.material3:material3")
 
     implementation(libs.androidx.navigation.compose)
+    implementation("androidx.compose.material:material-icons-extended")
     implementation(libs.androidx.navigation.compose)
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)

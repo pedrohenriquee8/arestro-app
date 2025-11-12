@@ -10,6 +10,8 @@ import br.edu.ifal.aluno.arestro.screens.CartScreen
 import br.edu.ifal.aluno.arestro.screens.OnBoardingScreen
 import br.edu.ifal.aluno.arestro.screens.ProfileScreen
 import br.edu.ifal.aluno.arestro.screens.SearchScreen
+import br.edu.ifal.aluno.arestro.screens.LoginScreen
+import br.edu.ifal.aluno.arestro.screens.SignUpScreen
 import kotlinx.serialization.Serializable
 
 @Serializable
@@ -31,11 +33,43 @@ object CartRoute
 object ProfileRoute
 
 @Serializable
-object DashboardRoute
+object LoginRoute
+
+@Serializable
+object SignUpRoute
+
 
 @Composable
 fun ArestroNavHost(navController: NavHostController) {
-    NavHost(navController = navController, startDestination = OnBoardingRoute) {
+    NavHost(navController = navController, startDestination = LoginRoute) {
+
+        composable<LoginRoute>{
+            LoginScreen(
+                onLoginClick = {
+                    navController.navigate(AppRoute) {
+                        popUpTo(LoginRoute) { inclusive = true }
+                    }
+                },
+                onSignUpClick = {
+                    navController.navigate(SignUpRoute)
+                }
+            )
+        }
+
+
+        composable<SignUpRoute> {
+            SignUpScreen(
+                onSignUpClick = {
+                    navController.navigate(AppRoute) {
+                        popUpTo(LoginRoute) { inclusive = true }
+                    }
+                },
+                onLoginClick = {
+                    navController.navigate(LoginRoute)
+                }
+            )
+        }
+
         composable<OnBoardingRoute> {
             OnBoardingScreen(
                 onNavigateToHomePage = {
