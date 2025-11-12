@@ -16,7 +16,6 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
-import androidx.navigation.NavController
 import br.edu.ifal.aluno.arestro.model.BottomNavBarItem
 import br.edu.ifal.aluno.arestro.screens.CartScreen
 import br.edu.ifal.aluno.arestro.screens.HomeScreen
@@ -29,11 +28,7 @@ val bottomNavBarItems = listOf(
 )
 
 @Composable
-fun Layout(
-    showAppBar: Boolean = false,
-    showBottomBar: Boolean = false,
-    navController: NavController,
-) {
+fun AppLayout() {
     var selectedItem by remember { mutableStateOf(bottomNavBarItems.first()) }
     val pageState = rememberPagerState { bottomNavBarItems.size }
 
@@ -48,19 +43,15 @@ fun Layout(
 
     Scaffold(
         topBar = {
-            if (showAppBar) {
-                AppBar()
-            }
+            AppBar()
         },
         bottomBar = {
-            if (showBottomBar) {
-                BottomNavBar(
-                    selectedItem = selectedItem,
-                    onItemChanged = { item ->
-                        selectedItem = item
-                    }
-                )
-            }
+            BottomNavBar(
+                selectedItem = selectedItem,
+                onItemChanged = { item ->
+                    selectedItem = item
+                }
+            )
         }
     ) { innerPadding ->
         Surface(
