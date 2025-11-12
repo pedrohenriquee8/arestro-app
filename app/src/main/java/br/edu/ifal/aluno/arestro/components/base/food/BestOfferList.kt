@@ -30,7 +30,6 @@ fun BestOffersList(
         horizontalArrangement = Arrangement.spacedBy(16.dp)
     ) {
         itemsIndexed(items) { index, item ->
-
             val scale by remember {
                 derivedStateOf {
                     val itemSizePx = with(density) { itemWidthDp.toPx() }
@@ -46,7 +45,6 @@ fun BestOffersList(
                     val maxScale = 1.2f
                     val minScale = 1.0f
                     val scaleRange = maxScale - minScale
-
 
                     val normalizedDistance = (distanceFromCenter / viewportCenter).coerceIn(0f, 1f)
 

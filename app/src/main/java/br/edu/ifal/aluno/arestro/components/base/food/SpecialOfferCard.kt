@@ -59,7 +59,7 @@ fun SpecialOfferCard(
             )
 
             Image(
-                painter = painterResource(id = R.drawable.delicious_burgers),
+                painter = painterResource(id = R.drawable.delicious_burgers2),
                 contentDescription = offer?.title ?: "Oferta Especial",
                 contentScale = ContentScale.Crop,
                 modifier = Modifier
@@ -106,7 +106,7 @@ fun SpecialOfferCard(
                         contentColor = Color(0xFF1B5E20)
                     ),
                     shape = RoundedCornerShape(4.dp),
-                    contentPadding = PaddingValues(horizontal = 12.dp, vertical = 8.dp)
+                    contentPadding = PaddingValues(horizontal = 8.dp, vertical = 8.dp)
                 ) {
                     Text(
                         text = "Buy Now",
