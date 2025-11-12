@@ -4,44 +4,48 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
+import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Text
+import androidx.compose.foundation.layout.systemBars
+import androidx.compose.foundation.layout.windowInsetsPadding
+import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
+import androidx.navigation.compose.rememberNavController
+import br.edu.ifal.aluno.arestro.main.navigation.ArestroNavHost
 import br.edu.ifal.aluno.arestro.ui.theme.ARestroTheme
 
 class MainActivity : ComponentActivity() {
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        // enableEdgeToEdge() -> faz a tela ocupar toda a área, desenhando por trás
+        // das barras do sistema e aplicando insets automaticamente.
         enableEdgeToEdge()
         setContent {
             ARestroTheme {
-                Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    Greeting(
-                        name = "Android",
-                        modifier = Modifier.padding(innerPadding)
-                    )
+                val navController = rememberNavController()
+                ArestroApp {
+                    ArestroNavHost(navController)
                 }
             }
         }
     }
-}
 
-@Composable
-fun Greeting(name: String, modifier: Modifier = Modifier) {
-    Text(
-        text = "Hello $name!",
-        modifier = modifier
-    )
-}
+    @Composable
+    fun ArestroApp(
+        content: @Composable () -> Unit
+    ) {
+        // windowInsetsPadding(WindowInsets.systemBars) -> adiciona o padding necessário
+        // para não sobrepor barras de status e navegação.
+        // Obs.: Utilizado associado ao enableEdgeToEdge()
 
-@Preview(showBackground = true)
-@Composable
-fun GreetingPreview() {
-    ARestroTheme {
-        Greeting("Android")
+        Surface(
+            modifier = Modifier
+                .fillMaxSize()
+                .windowInsetsPadding(WindowInsets.systemBars),
+        ) {
+            content()
+        }
     }
 }
