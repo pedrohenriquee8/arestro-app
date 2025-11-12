@@ -1,6 +1,5 @@
-package br.edu.ifal.aluno.arestro.main.components
-import android.R.attr.clickable
-import androidx.compose.foundation.Image
+package br.edu.ifal.aluno.arestro.components.base.food
+
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
@@ -17,18 +16,20 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.compose.ui.zIndex
-import br.edu.ifal.aluno.arestro.main.model.FoodItem
+import br.edu.ifal.aluno.arestro.model.food.Food
 import coil.compose.AsyncImage
 
 @Composable
 fun FoodCardItem(
-    item: FoodItem,
+    item: Food,
     scale: Float,
-    onItemClick: (FoodItem) -> Unit,
+    onItemClick: (Food) -> Unit,
     modifier: Modifier = Modifier
 ) {
 
@@ -61,9 +62,38 @@ fun FoodCardItem(
                     .fillMaxWidth(),
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
-                Text(item.name, fontWeight = FontWeight.SemiBold)
-                Text(item.description, style = MaterialTheme.typography.bodySmall, color = Color.Gray)
+                Text(
+                    item.name,
+                    fontWeight = FontWeight.SemiBold,
+                    style = MaterialTheme.typography.headlineMedium.copy(
+                        fontSize = 16.sp,
+                        lineHeight = 20.sp,
+                        textAlign = TextAlign.Center,
+                    )
+                )
+
                 Spacer(Modifier.height(4.dp))
+
+                Text(
+                    item.description, style = MaterialTheme.typography.headlineMedium.copy(
+                        fontSize = 12.sp,
+                        lineHeight = 12.sp,
+                        textAlign = TextAlign.Center,
+                    ), color = Color.Gray, maxLines = 2, overflow = TextOverflow.Ellipsis
+                )
+
+                if (item.description.length > 50) {
+                    Text(
+                        "Saiba mais",
+                        style = MaterialTheme.typography.bodySmall,
+                        color = Color.Blue,
+                        fontWeight = FontWeight.SemiBold,
+                        modifier = Modifier.clickable { onItemClick(item) }
+                    )
+                }
+
+                Spacer(Modifier.height(4.dp))
+
                 Text("R$ ${item.price}", color = Color(0xFF4CAF50), fontWeight = FontWeight.Bold)
             }
         }

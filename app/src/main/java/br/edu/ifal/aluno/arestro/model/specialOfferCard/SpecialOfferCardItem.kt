@@ -1,4 +1,4 @@
-package br.edu.ifal.aluno.arestro.main.model
+package br.edu.ifal.aluno.arestro.model.specialOfferCard
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey

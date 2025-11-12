@@ -1,4 +1,4 @@
-package br.edu.ifal.aluno.arestro.main.components
+package br.edu.ifal.aluno.arestro.components.base.food
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -13,6 +13,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
@@ -20,7 +21,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import br.edu.ifal.aluno.arestro.R
-import br.edu.ifal.aluno.arestro.main.model.SpecialOfferCard
+import br.edu.ifal.aluno.arestro.model.specialOfferCard.SpecialOfferCard
 
 @Composable
 fun SpecialOfferCard(
@@ -34,7 +35,7 @@ fun SpecialOfferCard(
         elevation = CardDefaults.cardElevation(defaultElevation = 8.dp),
         modifier = modifier
             .fillMaxWidth()
-            .padding(horizontal = 16.dp, vertical = 8.dp)
+            .padding(horizontal = 16.dp, vertical = 16.dp)
             .height(180.dp)
     ) {
 
@@ -63,15 +64,23 @@ fun SpecialOfferCard(
                 contentScale = ContentScale.Crop,
                 modifier = Modifier
                     .fillMaxHeight()
-                    .fillMaxWidth(0.4f)
+                    .fillMaxWidth(0.5f)
                     .align(Alignment.CenterEnd)
+                    .clip(
+                        RoundedCornerShape(
+                            topStart = 0.dp,
+                            topEnd = 8.dp,
+                            bottomStart = 0.dp,
+                            bottomEnd = 8.dp
+                        )
+                    )
             )
 
             Column(
                 modifier = Modifier
                     .fillMaxHeight()
                     .padding(16.dp)
-                    .fillMaxWidth(0.6f)
+                    .fillMaxWidth(0.5f)
                     .align(Alignment.CenterStart)
             ) {
                 Text(
@@ -99,7 +108,11 @@ fun SpecialOfferCard(
                     shape = RoundedCornerShape(4.dp),
                     contentPadding = PaddingValues(horizontal = 12.dp, vertical = 8.dp)
                 ) {
-                    Text(text = "Buy Now", fontWeight = FontWeight.SemiBold)
+                    Text(
+                        text = "Buy Now",
+                        fontWeight = FontWeight.SemiBold,
+                        color = Color(0xFF1B5E20)
+                    )
                 }
             }
         }

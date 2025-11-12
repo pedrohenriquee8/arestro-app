@@ -6,7 +6,7 @@ import androidx.compose.material.icons.filled.Search
 import androidx.compose.material.icons.filled.ShoppingCart
 import androidx.compose.ui.graphics.vector.ImageVector
 import br.edu.ifal.aluno.arestro.navigation.cartRoute
-import br.edu.ifal.aluno.arestro.navigation.homeRoute
+import br.edu.ifal.aluno.arestro.navigation.dashboardRoute
 import br.edu.ifal.aluno.arestro.navigation.searchRoute
 
 sealed class BottomNavBarItem(
@@ -17,7 +17,7 @@ sealed class BottomNavBarItem(
     object HomeNavBarItem : BottomNavBarItem(
         label = "Home",
         icon = Icons.Filled.Home,
-        route = homeRoute,
+        route = dashboardRoute,
     )
 
     object SearchNavBarItem : BottomNavBarItem(

@@ -1,4 +1,4 @@
-package br.edu.ifal.aluno.arestro.main.components
+package br.edu.ifal.aluno.arestro.components.base
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*

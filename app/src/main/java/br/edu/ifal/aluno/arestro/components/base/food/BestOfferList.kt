@@ -1,4 +1,4 @@
-package br.edu.ifal.aluno.arestro.main.components
+package br.edu.ifal.aluno.arestro.components.base.food
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.PaddingValues
@@ -9,16 +9,16 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
-import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.unit.dp
-import br.edu.ifal.aluno.arestro.main.model.FoodItem
+import br.edu.ifal.aluno.arestro.model.food.Food
+import kotlin.math.abs
 
 @Composable
 fun BestOffersList(
-    items: List<FoodItem>,
-    onItemClick: (FoodItem) -> Unit
+    items: List<Food>,
+    onItemClick: (Food) -> Unit
 ) {
     val listState = rememberLazyListState()
     val density = LocalDensity.current
@@ -41,7 +41,7 @@ fun BestOffersList(
 
                     val viewportCenter = listState.layoutInfo.viewportSize.width / 2f
                     val itemCenter = itemOffset + itemSizePx / 2f
-                    val distanceFromCenter = kotlin.math.abs(itemCenter - viewportCenter)
+                    val distanceFromCenter = abs(itemCenter - viewportCenter)
 
                     val maxScale = 1.2f
                     val minScale = 1.0f

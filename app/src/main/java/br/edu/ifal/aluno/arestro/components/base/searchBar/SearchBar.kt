@@ -1,11 +1,10 @@
-package br.edu.ifal.aluno.arestro.main.components
+package br.edu.ifal.aluno.arestro.components.base.searchBar
 
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Mic
 import androidx.compose.material.icons.filled.Search
 import androidx.compose.material.icons.outlined.Mic
 import androidx.compose.material3.Icon

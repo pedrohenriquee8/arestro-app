@@ -1,4 +1,4 @@
-package br.edu.ifal.aluno.arestro.main.api
+package br.edu.ifal.aluno.arestro.api
 
 import FoodApi
 import retrofit2.Retrofit

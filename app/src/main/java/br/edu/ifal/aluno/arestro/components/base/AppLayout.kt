@@ -18,7 +18,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import br.edu.ifal.aluno.arestro.model.BottomNavBarItem
 import br.edu.ifal.aluno.arestro.screens.CartScreen
-import br.edu.ifal.aluno.arestro.screens.HomeScreen
+import br.edu.ifal.aluno.arestro.screens.DashboardScreen
 import br.edu.ifal.aluno.arestro.screens.SearchScreen
 
 val bottomNavBarItems = listOf(
@@ -67,7 +67,7 @@ fun AppLayout(
             HorizontalPager(pageState) { page ->
                 val item = bottomNavBarItems[page]
                 when (item) {
-                    BottomNavBarItem.HomeNavBarItem -> HomeScreen()
+                    BottomNavBarItem.HomeNavBarItem -> DashboardScreen()
                     BottomNavBarItem.SearchNavBarItem -> SearchScreen()
                     BottomNavBarItem.CartNavBarItem -> CartScreen()
                 }

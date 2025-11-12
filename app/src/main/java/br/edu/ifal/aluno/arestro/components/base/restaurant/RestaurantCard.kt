@@ -1,4 +1,4 @@
-package br.edu.ifal.aluno.arestro.main.components
+package br.edu.ifal.aluno.arestro.components.base.restaurant
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
@@ -19,13 +19,13 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import br.edu.ifal.aluno.arestro.R
-import br.edu.ifal.aluno.arestro.main.model.RestaurantItem
+import br.edu.ifal.aluno.arestro.model.restaurant.Restaurant
 import coil.compose.AsyncImage
 
 @Composable
 fun RestaurantCard(
-    item: RestaurantItem,
-    onItemClick: (RestaurantItem) -> Unit,
+    item: Restaurant,
+    onItemClick: (Restaurant) -> Unit,
     modifier: Modifier = Modifier
 ) {
     Column(
