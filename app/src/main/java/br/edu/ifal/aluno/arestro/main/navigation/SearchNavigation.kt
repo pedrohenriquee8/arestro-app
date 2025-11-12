@@ -7,12 +7,12 @@ import br.edu.ifal.aluno.arestro.main.screens.SearchScreen
 
 const val searchRoute = "searchScreen"
 
-fun NavGraphBuilder.exploreScreen(navController: NavController) {
+fun NavGraphBuilder.searchScreen(navController: NavController) {
     composable(searchRoute) {
         SearchScreen()
     }
 }
 
-fun NavController.navigateToExploreScreen() {
+fun NavController.navigateToSearchScreen() {
     navigate(searchRoute)
 }

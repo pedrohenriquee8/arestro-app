@@ -1,7 +1,7 @@
-import br.edu.ifal.aluno.arestro.main.components.FoodItem
+import br.edu.ifal.aluno.arestro.main.model.FoodItem
 import retrofit2.http.GET
 
-interface FoodsApi {
-    @GET("best-offers")
-    suspend fun getBestOffers(): List<FoodItem>
+interface FoodApi {
+    @GET("foods")
+    suspend fun getFoods(): List<FoodItem>
 }

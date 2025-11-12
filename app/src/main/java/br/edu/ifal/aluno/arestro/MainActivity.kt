@@ -12,15 +12,12 @@ import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.navigation.compose.rememberNavController
-import br.edu.ifal.aluno.arestro.main.navigation.ArestroNavHost
+import br.edu.ifal.aluno.arestro.navigation.ArestroNavHost
 import br.edu.ifal.aluno.arestro.ui.theme.ARestroTheme
 
 class MainActivity : ComponentActivity() {
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        // enableEdgeToEdge() -> faz a tela ocupar toda a área, desenhando por trás
-        // das barras do sistema e aplicando insets automaticamente.
         enableEdgeToEdge()
         setContent {
             ARestroTheme {
@@ -31,21 +28,17 @@ class MainActivity : ComponentActivity() {
             }
         }
     }
+}
 
-    @Composable
-    fun ArestroApp(
-        content: @Composable () -> Unit
+@Composable
+fun ArestroApp(
+    content: @Composable () -> Unit
+) {
+    Surface(
+        modifier = Modifier
+            .fillMaxSize()
+            .windowInsetsPadding(WindowInsets.systemBars),
     ) {
-        // windowInsetsPadding(WindowInsets.systemBars) -> adiciona o padding necessário
-        // para não sobrepor barras de status e navegação.
-        // Obs.: Utilizado associado ao enableEdgeToEdge()
-
-        Surface(
-            modifier = Modifier
-                .fillMaxSize()
-                .windowInsetsPadding(WindowInsets.systemBars),
-        ) {
-            content()
-        }
+        content()
     }
 }

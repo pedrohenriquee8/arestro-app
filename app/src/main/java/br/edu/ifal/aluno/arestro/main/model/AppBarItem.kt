@@ -7,6 +7,7 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.AccountCircle
 import androidx.compose.material.icons.filled.Menu
 import androidx.compose.material.icons.filled.Restaurant
 import androidx.compose.material3.CenterAlignedTopAppBar
@@ -28,6 +29,7 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 
 @Composable
+@OptIn(androidx.compose.material3.ExperimentalMaterial3Api::class)
 fun AppBarItem(
     scope: CoroutineScope,
     drawerState: DrawerState,
@@ -41,8 +43,9 @@ fun AppBarItem(
                 }
             }) {
                 Icon(
-                    imageVector = Icons.Filled.Menu,
-                    contentDescription = "Menu Gaveta"
+                    painter = painterResource(R.drawable.menu),
+                    contentDescription = "Menu Gaveta",
+                    modifier = Modifier.size(18.dp)
                 )
             }
         },
@@ -50,29 +53,24 @@ fun AppBarItem(
             Row(
                 verticalAlignment = Alignment.CenterVertically
             ) {
-                Icon(
-                    imageVector = Icons.Default.Restaurant,
-                    contentDescription = null,
-                    tint = Color(0xFF4CAF50),
-                    modifier = Modifier.size(24.dp)
-                )
-                Spacer(Modifier.width(8.dp))
-                Text(
-                    text = "ARestro",
-                    style = MaterialTheme.typography.titleLarge,
-                    color = Color(0xFF4CAF50)
+                Image(
+                    painter = painterResource(R.drawable.logo),
+                    contentDescription = "Logo do App",
+                    modifier = Modifier
+                        .size(118.dp)
                 )
             }
         },
         actions = {
-            IconButton(onClick = onAvatarClick) {
-                Image(
-                    painter = painterResource(id = R.drawable.default_avatar_image),
-                    contentDescription = "Foto de Perfil",
-                    contentScale = ContentScale.Crop,
-                    modifier = Modifier
-                        .size(32.dp)
-                        .clip(CircleShape)
+            IconButton(onClick = {
+                scope.launch {
+                    drawerState.open()
+                }
+            }) {
+                Icon(
+                    imageVector = Icons.Default.AccountCircle,
+                    contentDescription = "Imagem de Perfil",
+                    modifier = Modifier.size(32.dp)
                 )
             }
         }
