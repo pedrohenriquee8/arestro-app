@@ -30,6 +30,11 @@ import br.edu.ifal.aluno.arestro.model.specialOfferCard.SpecialOfferCard
 import kotlinx.coroutines.launch
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.platform.LocalContext
+import br.edu.ifal.aluno.arestro.db.DatabaseHelper
+import br.edu.ifal.aluno.arestro.model.food.SpecialOfferEntity
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
 
 @Composable
 fun DashboardScreen(onNavigateToDetail: (Int) -> Unit = {}) {
@@ -40,6 +45,8 @@ fun DashboardScreen(onNavigateToDetail: (Int) -> Unit = {}) {
     var isLoading by remember { mutableStateOf(true) }
     var error by remember { mutableStateOf<String?>(null) }
 
+    val context = LocalContext.current
+
     val scope = rememberCoroutineScope()
 
     LaunchedEffect(Unit) {
@@ -47,6 +54,34 @@ fun DashboardScreen(onNavigateToDetail: (Int) -> Unit = {}) {
         error = null
         scope.launch {
             try {
+
+                val db = DatabaseHelper.getInstance(context)
+                val offerDao = db.specialOfferDao()
+
+                withContext(Dispatchers.IO) {
+                    if (offerDao.getSpecialOffer() == null) {
+                        offerDao.insert(
+                            SpecialOfferEntity(
+                                title = "Super Burger",
+                                description = "Oferta exclusiva",
+                                imageUrl = "https://ibb.co/35PBPwJk"
+                            )
+                        )
+                    }
+                }
+
+                val offerEntity = withContext(Dispatchers.IO) {
+                    offerDao.getSpecialOffer()
+                }
+
+                specialOffer = offerEntity?.let { entity ->
+                    SpecialOfferCard(
+                        title = entity.title,
+                        description = entity.description,
+                        photo_url = entity.imageUrl
+                    )
+                }
+
                 val fetchedOffers = RetrofitClient.foodApi.getFoods()
                 bestOffers = fetchedOffers
 
