@@ -28,9 +28,7 @@ val bottomNavBarItems = listOf(
 )
 
 @Composable
-fun AppLayout(
-    onNavigateToProfileScreen: () -> Unit = {},
-) {
+fun AppLayout() {
     var selectedItem by remember { mutableStateOf(bottomNavBarItems.first()) }
     val pageState = rememberPagerState { bottomNavBarItems.size }
 
@@ -45,9 +43,7 @@ fun AppLayout(
 
     Scaffold(
         topBar = {
-            AppBar(
-                onNavigateToProfileScreen = onNavigateToProfileScreen
-            )
+            AppBar()
         },
         bottomBar = {
             BottomNavBar(
