@@ -7,15 +7,18 @@ import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
 import br.edu.ifal.aluno.arestro.model.contact.Contact
 import br.edu.ifal.aluno.arestro.model.contact.ContactTypeConverter
+import br.edu.ifal.aluno.arestro.model.order.Order
+import br.edu.ifal.aluno.arestro.model.order.OrderItem
 
 @Database(
     version = 1,
-    entities = [Contact::class],
+    entities = [Contact::class, Order::class, OrderItem::class],
 )
 @TypeConverters(ContactTypeConverter::class)
 
 abstract class DatabaseHelper : RoomDatabase() {
     abstract fun contactDao(): ContactDao
+    abstract fun orderDao(): OrderDao
 
     companion object {
         fun getInstance(context: Context): DatabaseHelper {
