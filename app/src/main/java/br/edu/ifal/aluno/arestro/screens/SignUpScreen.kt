@@ -1,8 +1,10 @@
     package br.edu.ifal.aluno.arestro.screens
 
+    import android.util.Log
     import androidx.compose.runtime.Composable
 
     import androidx.compose.foundation.BorderStroke
+    import androidx.compose.foundation.Image
     import androidx.compose.foundation.background
     import androidx.compose.foundation.clickable
     import androidx.compose.foundation.layout.*
@@ -24,6 +26,8 @@
     import androidx.compose.material.icons.filled.Visibility
     import androidx.compose.material.icons.filled.VisibilityOff
     import androidx.compose.ui.platform.LocalContext
+    import androidx.compose.ui.res.painterResource
+    import br.edu.ifal.aluno.arestro.R
     import br.edu.ifal.aluno.arestro.db.DatabaseHelper
     import br.edu.ifal.aluno.arestro.model.user.User
     import kotlinx.coroutines.launch
@@ -54,21 +58,12 @@
             ) {
                 Spacer(modifier = Modifier.height(32.dp))
 
-                // Logo
-                Box(
+                Image(
+                    painter = painterResource(R.drawable.arestro_small_icon),
+                    contentDescription = "Logo Aresto",
                     modifier = Modifier
                         .size(80.dp)
-                        .background(
-                            color = Color(0xFF16A34A),
-                            shape = CircleShape
-                        ),
-                    contentAlignment = Alignment.Center
-                ) {
-                    Text(
-                        text = "🍽️",
-                        fontSize = 40.sp
-                    )
-                }
+                )
 
                 Spacer(modifier = Modifier.height(24.dp))
 
@@ -199,7 +194,6 @@
 
                 Spacer(modifier = Modifier.height(24.dp))
 
-                // Sign Up Button
                 Button(
                     onClick = {
                         scope.launch {

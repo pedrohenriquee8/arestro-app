@@ -81,13 +81,9 @@ fun ArestroNavHost(navController: NavHostController) {
         composable<AppRoute> {
             AppLayout(
                 onNavigateToProfileScreen = {
-                    navController.navigate(DashboardRoute)
+                        navController.navigate(ProfileRoute)
                 }
             )
-        }
-
-        composable<DashboardRoute> {
-            DashboardScreen()
         }
 
         composable<SearchRoute> {

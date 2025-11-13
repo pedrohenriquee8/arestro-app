@@ -12,7 +12,3 @@ fun NavGraphBuilder.homeScreen() {
         DashboardScreen()
     }
 }
-
-fun NavController.navigateToDashboardScreen() {
-    navigate(DashboardRoute)
-}

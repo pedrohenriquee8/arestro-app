@@ -48,7 +48,6 @@ dependencies {
     implementation(libs.androidx.room.common.jvm)
 
     // Room
-    implementation(libs.androidx.compose.foundation)
     val room_version = "2.8.1"
     implementation("androidx.room:room-runtime:$room_version")
     // kapt

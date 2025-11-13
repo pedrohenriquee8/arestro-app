@@ -16,4 +16,6 @@ object RetrofitClient {
 
     val foodApi: FoodApi = retrofit.create(FoodApi::class.java)
     val restaurantApi: RestaurantApi = retrofit.create(RestaurantApi::class.java)
+
+    val userApi: UserApi = retrofit.create(UserApi::class.java)
 }

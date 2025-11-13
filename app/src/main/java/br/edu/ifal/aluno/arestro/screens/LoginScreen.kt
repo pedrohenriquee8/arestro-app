@@ -1,6 +1,7 @@
 package br.edu.ifal.aluno.arestro.screens
 
 import androidx.compose.foundation.BorderStroke
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
@@ -21,13 +22,28 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.material.icons.filled.Visibility
 import androidx.compose.material.icons.filled.VisibilityOff
-
+import androidx.compose.ui.res.painterResource
+import kotlinx.coroutines.launch
+import br.edu.ifal.aluno.arestro.R
 
 @Composable
 fun LoginScreen(onLoginClick: () -> Unit, onSignUpClick: () -> Unit) {
     var email by remember { mutableStateOf("") }
     var password by remember { mutableStateOf("") }
     var passwordVisible by remember { mutableStateOf(false) }
+    var errorMessage by remember { mutableStateOf<String?>(null) }
+
+    val scope = rememberCoroutineScope()
+
+    suspend fun logar(email: String, password: String): Boolean {
+        return try {
+            val user = br.edu.ifal.aluno.arestro.api.RetrofitClient.userApi.getUser()
+            user.email == email && user.password == password
+        } catch (e: Exception) {
+            e.printStackTrace()
+            false
+        }
+    }
 
     Box(
         modifier = Modifier
@@ -44,20 +60,13 @@ fun LoginScreen(onLoginClick: () -> Unit, onSignUpClick: () -> Unit) {
         ) {
             Spacer(modifier = Modifier.height(32.dp))
 
-            Box(
+
+            Image(
+                painter = painterResource(R.drawable.arestro_small_icon),
+                contentDescription = "Logo Aresto",
                 modifier = Modifier
                     .size(80.dp)
-                    .background(
-                        color = Color(0xFF16A34A),
-                        shape = CircleShape
-                    ),
-                contentAlignment = Alignment.Center
-            ) {
-                Text(
-                    text = "🍽️",
-                    fontSize = 40.sp
-                )
-            }
+            )
 
             Spacer(modifier = Modifier.height(24.dp))
 
@@ -135,7 +144,17 @@ fun LoginScreen(onLoginClick: () -> Unit, onSignUpClick: () -> Unit) {
             Spacer(modifier = Modifier.height(24.dp))
 
             Button(
-                onClick = onLoginClick,
+                onClick = {
+                    scope.launch {
+                        val success = logar(email, password)
+
+                        if (success) {
+                            onLoginClick()
+                        } else {
+                            errorMessage = "Email ou senha incorretos"
+                        }
+                    }
+                },
                 modifier = Modifier
                     .fillMaxWidth()
                     .height(48.dp),
@@ -149,6 +168,15 @@ fun LoginScreen(onLoginClick: () -> Unit, onSignUpClick: () -> Unit) {
                     fontSize = 16.sp,
                     fontWeight = FontWeight.Bold,
                     color = Color.White
+                )
+            }
+
+            if (errorMessage != null) {
+                Spacer(modifier = Modifier.height(12.dp))
+                Text(
+                    text = errorMessage!!,
+                    color = Color.Red,
+                    fontSize = 14.sp
                 )
             }
 
