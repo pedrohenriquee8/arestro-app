@@ -16,6 +16,8 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
 import br.edu.ifal.aluno.arestro.model.BottomNavBarItem
 import br.edu.ifal.aluno.arestro.screens.CartScreen
 import br.edu.ifal.aluno.arestro.screens.HomeScreen
@@ -28,9 +30,10 @@ val bottomNavBarItems = listOf(
 )
 
 @Composable
-fun AppLayout() {
+fun AppLayout(navController: NavController) {
     var selectedItem by remember { mutableStateOf(bottomNavBarItems.first()) }
     val pageState = rememberPagerState { bottomNavBarItems.size }
+    val innerNavController = rememberNavController()
 
     LaunchedEffect(selectedItem) {
         val currentIndex = bottomNavBarItems.indexOf(selectedItem)
@@ -64,10 +67,12 @@ fun AppLayout() {
                 val item = bottomNavBarItems[page]
                 when (item) {
                     BottomNavBarItem.HomeNavBarItem -> HomeScreen()
-                    BottomNavBarItem.SearchNavBarItem -> SearchScreen()
+                    BottomNavBarItem.SearchNavBarItem -> SearchScreen(navController = navController)
                     BottomNavBarItem.CartNavBarItem -> CartScreen()
                 }
             }
         }
     }
+
+    
 }

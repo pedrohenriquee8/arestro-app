@@ -27,7 +27,7 @@ fun ArestroNavHost(navController: NavHostController) {
         }
 
         composable<HomeRoute> {
-            AppLayout()
+            AppLayout(navController = navController)
         }
     }
 }
