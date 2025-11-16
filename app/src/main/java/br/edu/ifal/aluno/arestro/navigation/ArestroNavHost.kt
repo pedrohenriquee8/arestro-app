@@ -5,8 +5,8 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import br.edu.ifal.aluno.arestro.components.base.AppLayout
-import br.edu.ifal.aluno.arestro.screens.DashboardScreen
 import br.edu.ifal.aluno.arestro.screens.CartScreen
+import br.edu.ifal.aluno.arestro.screens.DashboardScreen
 import br.edu.ifal.aluno.arestro.screens.OnBoardingScreen
 import br.edu.ifal.aluno.arestro.screens.ProfileScreen
 import br.edu.ifal.aluno.arestro.screens.SearchScreen
@@ -17,9 +17,6 @@ object OnBoardingRoute
 
 @Serializable
 object AppRoute
-
-@Serializable
-object HomeRoute
 
 @Serializable
 object SearchRoute
@@ -35,7 +32,7 @@ object DashboardRoute
 
 @Composable
 fun ArestroNavHost(navController: NavHostController) {
-    NavHost(navController = navController, startDestination = OnBoardingRoute) {
+    NavHost(navController = navController, startDestination = CartRoute) {
         composable<OnBoardingRoute> {
             OnBoardingScreen(
                 onNavigateToHomePage = {
@@ -47,7 +44,7 @@ fun ArestroNavHost(navController: NavHostController) {
         composable<AppRoute> {
             AppLayout(
                 onNavigateToProfileScreen = {
-                    navController.navigate(DashboardRoute)
+                    navController.navigate(ProfileRoute)
                 }
             )
         }

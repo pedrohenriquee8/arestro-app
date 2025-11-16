@@ -42,22 +42,13 @@ android {
 }
 
 dependencies {
-    // Retrofit
+    val room_version = "2.8.1"
+    implementation("androidx.room:room-runtime:${room_version}")
+    ksp("androidx.room:room-compiler:$room_version")
     implementation("com.squareup.retrofit2:retrofit:2.9.0")
     implementation("com.squareup.retrofit2:converter-gson:2.9.0")
-    implementation(libs.androidx.room.common.jvm)
-
-    // Room
-    val room_version = "2.8.1"
-    implementation("androidx.room:room-runtime:$room_version")
-    // kapt
-    ksp("androidx.room:room-compiler:$room_version")
-
-    implementation("androidx.compose.material:material-icons-extended:1.7.8")
     implementation("io.coil-kt:coil-compose:2.6.0")
-    implementation("androidx.compose.material3:material3")
-
-    implementation(libs.androidx.navigation.compose)
+    implementation("androidx.compose.material:material-icons-extended:1.7.8")
     implementation(libs.androidx.navigation.compose)
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)

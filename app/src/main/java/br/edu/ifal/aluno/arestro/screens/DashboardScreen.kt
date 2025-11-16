@@ -24,7 +24,6 @@ import br.edu.ifal.aluno.arestro.components.base.food.BestOffersList
 import br.edu.ifal.aluno.arestro.components.base.restaurant.RestaurantsNearbyList
 import br.edu.ifal.aluno.arestro.components.base.searchBar.SearchBarComponent
 import br.edu.ifal.aluno.arestro.components.base.SectionHeader
-import br.edu.ifal.aluno.arestro.model.food.Food
 import br.edu.ifal.aluno.arestro.model.restaurant.Restaurant
 import br.edu.ifal.aluno.arestro.model.specialOfferCard.SpecialOfferCard
 import kotlinx.coroutines.launch
@@ -32,6 +31,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.platform.LocalContext
 import br.edu.ifal.aluno.arestro.db.DatabaseHelper
+import br.edu.ifal.aluno.arestro.model.food.Food
 import br.edu.ifal.aluno.arestro.model.food.SpecialOfferEntity
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
@@ -78,7 +78,7 @@ fun DashboardScreen(onNavigateToDetail: (Int) -> Unit = {}) {
                     SpecialOfferCard(
                         title = entity.title,
                         description = entity.description,
-                        photo_url = entity.imageUrl
+                        photoUrl = entity.imageUrl
                     )
                 }
 
