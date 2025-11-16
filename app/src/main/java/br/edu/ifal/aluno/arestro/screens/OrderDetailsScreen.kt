@@ -47,12 +47,12 @@ import androidx.compose.ui.unit.sp
 import br.edu.ifal.aluno.arestro.R
 import br.edu.ifal.aluno.arestro.api.RetrofitClient
 import br.edu.ifal.aluno.arestro.db.DatabaseHelper
-import br.edu.ifal.aluno.arestro.model.Restaurant
+import br.edu.ifal.aluno.arestro.model.food.Food
+import br.edu.ifal.aluno.arestro.model.restaurant.Restaurant
 import br.edu.ifal.aluno.arestro.model.order.OrderWithItems
 import br.edu.ifal.aluno.arestro.model.order.orderItemList
 import br.edu.ifal.aluno.arestro.model.order.orderList
 import br.edu.ifal.aluno.arestro.ui.theme.Typography
-import br.edu.ifal.aluno.arestro.model.Food
 import br.edu.ifal.aluno.arestro.model.order.OrderItem
 import br.edu.ifal.aluno.arestro.ui.theme.Gray25
 import br.edu.ifal.aluno.arestro.ui.theme.Green90
@@ -110,7 +110,7 @@ fun OrderDetailsScreen() {
                     shape = RoundedCornerShape(12.dp)
                 ),
         ) {
-            val subtotal = orderWithItems?.order?.totalPrice?.toDouble() ?: 0.0
+            val subtotal = orderWithItems?.order?.totalPrice ?: 0.0
             val deliveryCharge = 50.00
             val total = subtotal + deliveryCharge
 
@@ -172,7 +172,7 @@ fun OrderDetailsItemCard(
             horizontalArrangement = Arrangement.SpaceBetween,
         ) {
             AsyncImage(
-                model = food?.photo_url,
+                model = food?.photoUrl,
                 error = painterResource(id = R.drawable.image_not_found),
                 contentDescription = food?.name + "image",
                 contentScale = ContentScale.Crop,

@@ -1,7 +1,8 @@
-package br.edu.ifal.aluno.arestro.model
+package br.edu.ifal.aluno.arestro.model.food
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import com.google.gson.annotations.SerializedName
 
 @Entity(tableName = "food")
 data class Food(
@@ -9,8 +10,10 @@ data class Food(
     val id: Int = 0,
     val name: String,
     val description: String,
-    val photo_url: String,
+    @SerializedName("photo_url")
+    val photoUrl: String,
     val rating: Double,
     val price: Double,
-    val restaurant_id: Int,
+    @SerializedName("restaurant_id")
+    val restaurantId: Int,
 )
