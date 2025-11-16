@@ -9,5 +9,5 @@ interface RestaurantApi {
     suspend fun getRestaurants(): List<Restaurant>
 
     @GET("restaurants/{id}")
-    suspend fun getRestaurantById(@Path("id") id: Int): Restaurant
+    suspend fun getRestaurantById(@Path("id") id: Int?): Restaurant
 }

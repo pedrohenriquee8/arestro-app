@@ -10,8 +10,8 @@ import br.edu.ifal.aluno.arestro.model.order.OrderWithItems
 
 @Dao
 interface OrderDao {
-    @Query("SELECT * FROM `order` WHERE id = :orderId AND userId = :userId")
-    suspend fun findOrderByUserId(orderId: Int, userId: Int): OrderWithItems
+    @Query("SELECT * FROM `order` WHERE userId = :userId")
+    suspend fun findOrdersByUserId(userId: Int): List<OrderWithItems?>
 
     @Insert
     suspend fun create(order: Order): Long
