@@ -2,9 +2,7 @@ package br.edu.ifal.aluno.arestro.components.cart
 
 import android.util.Log
 import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -18,6 +16,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import br.edu.ifal.aluno.arestro.ui.theme.Green90
@@ -38,54 +37,15 @@ fun Summary(
         val total = subtotal + deliveryFee
 
         Spacer(Modifier.height(12.dp))
-        Row(
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(horizontal = 30.dp),
-            horizontalArrangement = Arrangement.SpaceBetween
-        ) {
-            Text("Sub-Total", color = Color.White, fontSize = 14.sp)
-            Text(
-                "Rs %.2f".format(subtotal),
-                color = Color.White,
-                fontWeight = FontWeight.Normal,
-                fontSize = 14.sp
-            )
-        }
+        SummaryInfo("Sub-Total", subtotal)
         Spacer(Modifier.height(4.dp))
-        Row(
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(horizontal = 30.dp),
-            horizontalArrangement = Arrangement.SpaceBetween
-        ) {
-            Text("Delivery Fee", color = Color.White, fontSize = 14.sp)
-            Text(
-                "Rs %.2f".format(deliveryFee),
-                color = Color.White,
-                fontWeight = FontWeight.Normal,
-                fontSize = 14.sp
-            )
-        }
+        SummaryInfo("Delivery Fee", deliveryFee)
         HorizontalDivider(
             modifier = Modifier.padding(vertical = 8.dp),
             thickness = 1.dp,
             color = Color.White.copy(alpha = 0.3f)
         )
-        Row(
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(horizontal = 30.dp),
-            horizontalArrangement = Arrangement.SpaceBetween
-        ) {
-            Text("Total", color = Color.White, fontSize = 18.sp)
-            Text(
-                "Rs %.2f".format(total),
-                color = Color.White,
-                fontWeight = FontWeight.Bold,
-                fontSize = 18.sp
-            )
-        }
+        SummaryInfo("Total", total, isBold = true, fontSize = 18.sp)
         Spacer(Modifier.height(8.dp))
         Button(
             onClick = { Log.d("OrderDetailsScreen", "Place My Order clicked") },
