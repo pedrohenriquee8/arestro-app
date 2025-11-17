@@ -35,14 +35,12 @@ fun RestaurantCard(
         shape = RoundedCornerShape(16.dp),
         elevation = CardDefaults.cardElevation(4.dp),
 
-        // 🔥 COR DO FUNDO DEFINIDA COMO BRANCA
         colors = CardDefaults.cardColors(
             containerColor = Color.White
         )
     ) {
         Row(modifier = Modifier.padding(12.dp)) {
 
-            // ===================== IMAGEM ======================
             Image(
                 painter = rememberAsyncImagePainter(restaurant.imageUrl),
                 contentDescription = restaurant.name,
@@ -53,14 +51,12 @@ fun RestaurantCard(
                 contentScale = ContentScale.Crop
             )
 
-            // ===================== TEXTOS ======================
             Column(
                 modifier = Modifier
                     .padding(start = 12.dp)
                     .fillMaxWidth()
             ) {
 
-                // Nome + Estrelas
                 Row(
                     modifier = Modifier.fillMaxWidth(),
                     horizontalArrangement = Arrangement.SpaceBetween
@@ -70,28 +66,24 @@ fun RestaurantCard(
                         style = MaterialTheme.typography.titleMedium
                     )
 
-                    // ⭐ Exemplos (você pode melhorar depois)
                     Text(
                         text = "★★★★☆",
                         style = MaterialTheme.typography.bodySmall
                     )
                 }
 
-                // Localização (Address)
                 Text(
                     text = restaurant.address,
                     style = MaterialTheme.typography.bodySmall,
                     color = MaterialTheme.colorScheme.primary
                 )
 
-                // Descrição (2 linhas)
                 Text(
                     text = restaurant.description,
                     style = MaterialTheme.typography.bodySmall,
                     maxLines = 2
                 )
 
-                // Distância + Status
                 Row(
                     modifier = Modifier
                         .fillMaxWidth()

@@ -17,6 +17,7 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import br.edu.ifal.aluno.arestro.components.base.RestaurantCard
 import br.edu.ifal.aluno.arestro.data.model.Restaurant
+import br.edu.ifal.aluno.arestro.navigation.DetailsRoute
 
 @Composable
 fun RestaurantListScreen(navController: NavController) {
@@ -53,11 +54,10 @@ fun RestaurantListScreen(navController: NavController) {
                 )
             }
         }
-
         items(restaurants) { restaurant ->
             RestaurantCard(
                 restaurant = restaurant,
-                onClick = { navController.navigate("details/${restaurant.id}") }
+                onClick = { navController.navigate(DetailsRoute(restaurant.id)) }
             )
         }
     }
