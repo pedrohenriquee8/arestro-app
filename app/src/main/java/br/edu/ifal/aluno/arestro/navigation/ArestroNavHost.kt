@@ -8,6 +8,7 @@ import androidx.navigation.toRoute
 import br.edu.ifal.aluno.arestro.components.base.AppLayout
 import br.edu.ifal.aluno.arestro.screens.OnBoardingScreen
 import br.edu.ifal.aluno.arestro.screens.RestaurantDetailScreen
+import br.edu.ifal.aluno.arestro.screens.SearchPage
 import kotlinx.serialization.Serializable
 
 @Serializable
@@ -15,6 +16,9 @@ object OnBoardingRoute
 
 @Serializable
 object HomeRoute
+
+@Serializable
+object SearchRoute
 
 @Serializable
 data class DetailsRoute(val restaurantId: Int)
@@ -33,6 +37,10 @@ fun ArestroNavHost(navController: NavHostController) {
 
         composable<HomeRoute> {
             AppLayout(navController = navController)
+        }
+
+        composable<SearchRoute> {
+            SearchPage(navController)
         }
 
         composable<DetailsRoute> { backStackEntry ->
