@@ -35,6 +35,7 @@ import br.edu.ifal.aluno.arestro.R
 import br.edu.ifal.aluno.arestro.api.RetrofitClient
 import br.edu.ifal.aluno.arestro.components.base.AppBar
 import br.edu.ifal.aluno.arestro.components.base.BestOffersSection
+import br.edu.ifal.aluno.arestro.components.base.FacilityItem
 import br.edu.ifal.aluno.arestro.model.food.Food
 import br.edu.ifal.aluno.arestro.model.restaurant.Restaurant
 import br.edu.ifal.aluno.arestro.navigation.SearchRoute
@@ -180,22 +181,5 @@ fun RestaurantDetailScreen(navController: NavController, restaurantId: Int) {
                 )
             }
         }
-    }
-}
-
-@Composable
-fun FacilityItem(text: String) {
-    Row(
-        verticalAlignment = Alignment.CenterVertically,
-        modifier = Modifier.padding(vertical = 4.dp)
-    ) {
-        Icon(
-            painter = painterResource(id = R.drawable.ic_check),
-            contentDescription = null,
-            tint = Color(0xFF4CAF50),
-            modifier = Modifier.size(18.dp)
-        )
-        Spacer(modifier = Modifier.width(6.dp))
-        Text(text = text, style = MaterialTheme.typography.bodyMedium)
     }
 }
