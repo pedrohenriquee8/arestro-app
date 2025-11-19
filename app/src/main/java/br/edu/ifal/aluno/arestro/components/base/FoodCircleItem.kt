@@ -16,7 +16,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.unit.dp
-import br.edu.ifal.aluno.arestro.data.model.Food
+import br.edu.ifal.aluno.arestro.model.food.Food
 import coil.compose.rememberAsyncImagePainter
 
 @Composable
@@ -29,7 +29,7 @@ fun FoodCircleItem(food: Food) {
     ) {
 
         Image(
-            painter = rememberAsyncImagePainter(food.imageUrl),
+            painter = rememberAsyncImagePainter(food.photoUrl),
             contentDescription = food.name,
             modifier = Modifier
                 .size(160.dp)

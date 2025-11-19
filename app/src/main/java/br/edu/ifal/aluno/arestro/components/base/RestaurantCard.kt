@@ -19,7 +19,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.unit.dp
-import br.edu.ifal.aluno.arestro.data.model.Restaurant
+import br.edu.ifal.aluno.arestro.model.restaurant.Restaurant
 import coil.compose.rememberAsyncImagePainter
 
 @Composable
@@ -42,7 +42,7 @@ fun RestaurantCard(
         Row(modifier = Modifier.padding(12.dp)) {
 
             Image(
-                painter = rememberAsyncImagePainter(restaurant.imageUrl),
+                painter = rememberAsyncImagePainter(restaurant.photoUrl),
                 contentDescription = restaurant.name,
                 modifier = Modifier
                     .height(90.dp)
@@ -83,26 +83,6 @@ fun RestaurantCard(
                     style = MaterialTheme.typography.bodySmall,
                     maxLines = 2
                 )
-
-                Row(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(top = 8.dp),
-                    horizontalArrangement = Arrangement.SpaceBetween
-                ) {
-                    Row {
-                        Text("📍 ")
-                        Text(
-                            text = restaurant.distance,
-                            style = MaterialTheme.typography.bodySmall
-                        )
-                    }
-
-                    Text(
-                        text = restaurant.status,
-                        style = MaterialTheme.typography.bodySmall
-                    )
-                }
             }
         }
     }

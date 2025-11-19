@@ -18,6 +18,11 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -27,11 +32,11 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import br.edu.ifal.aluno.arestro.R
+import br.edu.ifal.aluno.arestro.api.RetrofitClient
 import br.edu.ifal.aluno.arestro.components.base.AppBar
 import br.edu.ifal.aluno.arestro.components.base.BestOffersSection
-import br.edu.ifal.aluno.arestro.components.base.FloatingWideButton
-import br.edu.ifal.aluno.arestro.data.model.Restaurant
-import br.edu.ifal.aluno.arestro.data.model.foodList
+import br.edu.ifal.aluno.arestro.model.food.Food
+import br.edu.ifal.aluno.arestro.model.restaurant.Restaurant
 import br.edu.ifal.aluno.arestro.navigation.SearchRoute
 import coil.compose.rememberAsyncImagePainter
 
@@ -39,11 +44,16 @@ import coil.compose.rememberAsyncImagePainter
 @Composable
 fun RestaurantDetailScreen(navController: NavController, restaurantId: Int) {
 
-    val restaurant = when (restaurantId) {
-        1 -> Restaurant(1, "Sabor Nordestino", "Rua das Flores, 123", "Comida regional deliciosa", "https://picsum.photos/300/200", "Aberto", "1.2 km")
-        2 -> Restaurant(2, "Itália Grill", "Av. Central, 45", "Massas e pizzas artesanais", "https://picsum.photos/301/200", "Fechado", "3.5 km")
-        else -> Restaurant(3, "Praia Bar", "Orla Marítima, 789", "Petiscos e drinks à beira-mar", "https://picsum.photos/302/200", "Aberto", "2.8 km")
+    var restaurant by remember { mutableStateOf<Restaurant?>(null) }
+    LaunchedEffect(Unit) {
+        restaurant = RetrofitClient.restaurantApi.getRestaurantById(restaurantId)
     }
+
+    var foods by remember { mutableStateOf<List<Food>>(emptyList()) }
+    LaunchedEffect(Unit) {
+        foods = RetrofitClient.foodApi.getFoods(restaurantId.toString())
+    }
+
 
     Scaffold(
         topBar = { AppBar() }
@@ -64,8 +74,8 @@ fun RestaurantDetailScreen(navController: NavController, restaurantId: Int) {
         ) {
 
             Image(
-                painter = rememberAsyncImagePainter(restaurant.imageUrl),
-                contentDescription = restaurant.name,
+                painter = rememberAsyncImagePainter(restaurant?.photoUrl),
+                contentDescription = restaurant?.name,
                 modifier = Modifier
                     .fillMaxWidth()
                     .height(260.dp),
@@ -82,7 +92,7 @@ fun RestaurantDetailScreen(navController: NavController, restaurantId: Int) {
                     verticalAlignment = Alignment.CenterVertically
                 ) {
                     Text(
-                        text = restaurant.name,
+                        text = restaurant?.name?:"Nome do Restaurante",
                         style = MaterialTheme.typography.headlineSmall
                     )
 
@@ -120,7 +130,6 @@ fun RestaurantDetailScreen(navController: NavController, restaurantId: Int) {
                             modifier = Modifier.size(18.dp)
                         )
                         Spacer(modifier = Modifier.width(4.dp))
-                        Text(text = restaurant.distance, style = MaterialTheme.typography.bodyMedium)
                     }
 
                     Text(
@@ -139,7 +148,7 @@ fun RestaurantDetailScreen(navController: NavController, restaurantId: Int) {
                 Spacer(modifier = Modifier.height(6.dp))
 
                 Text(
-                    text = restaurant.description,
+                    text = restaurant?.description?:"Descrição do restaurante",
                     style = MaterialTheme.typography.bodyMedium,
                     color = Color.Gray
                 )
@@ -167,12 +176,7 @@ fun RestaurantDetailScreen(navController: NavController, restaurantId: Int) {
                 Spacer(modifier = Modifier.height(24.dp))
 
                 BestOffersSection(
-                    foods = foodList.filter { it.restaurant_id == restaurant.id }
-                )
-
-                FloatingWideButton(
-                    text = "View Available Tables",
-                    onClick = {}
+                    foods
                 )
             }
         }

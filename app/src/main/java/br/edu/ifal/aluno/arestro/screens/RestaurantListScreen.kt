@@ -10,23 +10,27 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
+import br.edu.ifal.aluno.arestro.api.RetrofitClient
 import br.edu.ifal.aluno.arestro.components.base.RestaurantCard
-import br.edu.ifal.aluno.arestro.data.model.Restaurant
+import br.edu.ifal.aluno.arestro.model.restaurant.Restaurant
 import br.edu.ifal.aluno.arestro.navigation.DetailsRoute
 
 @Composable
 fun RestaurantListScreen(navController: NavController) {
-
-    val restaurants = listOf(
-        Restaurant(1, "Sabor Nordestino", "Rua das Flores, 123", "Comida regional deliciosa", "https://picsum.photos/300/200", "Aberto", "1.2 km"),
-        Restaurant(2, "Itália Grill", "Av. Central, 45", "Massas e pizzas artesanais", "https://picsum.photos/301/200", "Fechado", "3.5 km"),
-        Restaurant(3, "Praia Bar", "Orla Marítima, 789", "Petiscos e drinks à beira-mar", "https://picsum.photos/302/200", "Aberto", "2.8 km")
-    )
+    var restaurants by remember { mutableStateOf(emptyList<Restaurant>()) }
+    LaunchedEffect(Unit) {
+        restaurants = RetrofitClient.restaurantApi.getRestaurants()
+    }
 
     LazyColumn(
         modifier = Modifier

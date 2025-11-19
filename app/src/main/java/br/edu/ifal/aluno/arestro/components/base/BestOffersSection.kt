@@ -15,7 +15,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.compose.foundation.lazy.items
-import br.edu.ifal.aluno.arestro.data.model.Food
+import br.edu.ifal.aluno.arestro.model.food.Food
 
 @Composable
 fun BestOffersSection(foods: List<Food>) {
