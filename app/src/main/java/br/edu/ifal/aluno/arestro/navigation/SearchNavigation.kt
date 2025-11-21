@@ -10,7 +10,9 @@ const val searchRoute = "searchScreen"
 
 fun NavGraphBuilder.searchScreen() {
     composable(searchRoute) {
-        SearchScreen(navController = rememberNavController())
+        SearchScreen(
+            navController = rememberNavController()
+        )
     }
 }
 

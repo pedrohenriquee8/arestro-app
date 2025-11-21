@@ -44,7 +44,6 @@ import coil.compose.rememberAsyncImagePainter
 
 @Composable
 fun RestaurantDetailScreen(navController: NavController, restaurantId: Int) {
-
     var restaurant by remember { mutableStateOf<Restaurant?>(null) }
     LaunchedEffect(Unit) {
         restaurant = RetrofitClient.restaurantApi.getRestaurantById(restaurantId)

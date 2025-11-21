@@ -12,7 +12,9 @@ import androidx.navigation.NavController
 import br.edu.ifal.aluno.arestro.components.base.SearchCard
 
 @Composable
-fun SearchScreen(navController: NavController) {
+fun SearchScreen(
+    navController: NavController,
+) {
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -21,7 +23,6 @@ fun SearchScreen(navController: NavController) {
         SearchCard(
             onSearchClick = { query ->
                 println("Buscando por: $query")
-                navController.navigate("restaurant_list")
             },
             onAdvancedSearchClick = {
                 println("Pesquisa avançada clicada")
@@ -30,6 +31,6 @@ fun SearchScreen(navController: NavController) {
 
         Spacer(modifier = Modifier.height(12.dp))
 
-        RestaurantListScreen(navController = navController)
+        RestaurantListScreen(navController)
     }
 }

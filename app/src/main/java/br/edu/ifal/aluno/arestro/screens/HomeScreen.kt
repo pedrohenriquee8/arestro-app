@@ -1,4 +1,3 @@
-
 package br.edu.ifal.aluno.arestro.screens
 
 import androidx.compose.material3.Text

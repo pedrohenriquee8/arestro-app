@@ -26,7 +26,9 @@ import br.edu.ifal.aluno.arestro.model.restaurant.Restaurant
 import br.edu.ifal.aluno.arestro.navigation.DetailsRoute
 
 @Composable
-fun RestaurantListScreen(navController: NavController) {
+fun RestaurantListScreen(
+    navController: NavController,
+) {
     var restaurants by remember { mutableStateOf(emptyList<Restaurant>()) }
     LaunchedEffect(Unit) {
         restaurants = RetrofitClient.restaurantApi.getRestaurants()
@@ -61,7 +63,9 @@ fun RestaurantListScreen(navController: NavController) {
         items(restaurants) { restaurant ->
             RestaurantCard(
                 restaurant = restaurant,
-                onClick = { navController.navigate(DetailsRoute(restaurant.id)) }
+                onClick = {
+                    navController.navigate(DetailsRoute(restaurant.id))
+                }
             )
         }
     }

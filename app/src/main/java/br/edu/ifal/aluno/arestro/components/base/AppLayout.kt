@@ -17,10 +17,9 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.navigation.NavController
-import androidx.navigation.compose.rememberNavController
 import br.edu.ifal.aluno.arestro.model.BottomNavBarItem
 import br.edu.ifal.aluno.arestro.screens.CartScreen
-import br.edu.ifal.aluno.arestro.screens.HomeScreen
+import br.edu.ifal.aluno.arestro.screens.DashboardScreen
 import br.edu.ifal.aluno.arestro.screens.SearchScreen
 
 val bottomNavBarItems = listOf(
@@ -30,10 +29,12 @@ val bottomNavBarItems = listOf(
 )
 
 @Composable
-fun AppLayout(navController: NavController) {
+fun AppLayout(
+    onNavigateToProfileScreen: () -> Unit = {},
+    navController: NavController,
+) {
     var selectedItem by remember { mutableStateOf(bottomNavBarItems.first()) }
     val pageState = rememberPagerState { bottomNavBarItems.size }
-    val innerNavController = rememberNavController()
 
     LaunchedEffect(selectedItem) {
         val currentIndex = bottomNavBarItems.indexOf(selectedItem)
@@ -46,7 +47,9 @@ fun AppLayout(navController: NavController) {
 
     Scaffold(
         topBar = {
-            AppBar()
+            AppBar(
+                onNavigateToProfileScreen = onNavigateToProfileScreen
+            )
         },
         bottomBar = {
             BottomNavBar(
@@ -66,13 +69,13 @@ fun AppLayout(navController: NavController) {
             HorizontalPager(pageState) { page ->
                 val item = bottomNavBarItems[page]
                 when (item) {
-                    BottomNavBarItem.HomeNavBarItem -> HomeScreen()
-                    BottomNavBarItem.SearchNavBarItem -> SearchScreen(navController = navController)
+                    BottomNavBarItem.HomeNavBarItem -> DashboardScreen()
+                    BottomNavBarItem.SearchNavBarItem -> SearchScreen(
+                        navController = navController
+                    )
                     BottomNavBarItem.CartNavBarItem -> CartScreen()
                 }
             }
         }
     }
-
-    
 }
