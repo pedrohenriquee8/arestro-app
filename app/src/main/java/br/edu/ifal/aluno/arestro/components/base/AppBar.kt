@@ -27,7 +27,7 @@ import br.edu.ifal.aluno.arestro.ui.theme.Typography
 
 @Composable
 fun AppBar(
-    onNavigateToProfileScreen: () -> Unit = {}
+    onNavigateToProfileScreen: () -> Unit = {},
 ) {
     Surface(
         shadowElevation = 8.dp,

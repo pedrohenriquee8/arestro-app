@@ -82,7 +82,7 @@ fun DashboardScreen(onNavigateToDetail: (Int) -> Unit = {}) {
                     )
                 }
 
-                val fetchedOffers = RetrofitClient.foodApi.getFoods()
+                val fetchedOffers = RetrofitClient.foodApi.getFoods(null)
                 bestOffers = fetchedOffers
 
                 nearbyRestaurants = RetrofitClient.restaurantApi.getRestaurants()

@@ -13,6 +13,6 @@ object RetrofitClient {
             .build()
     }
 
-    val foodApi: FoodApi = retrofit.create(FoodApi::class.java)
     val restaurantApi: RestaurantApi = retrofit.create(RestaurantApi::class.java)
+    val foodApi: FoodApi = retrofit.create(FoodApi::class.java)
 }

@@ -4,11 +4,13 @@ import androidx.compose.runtime.Composable
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
+import androidx.navigation.toRoute
 import br.edu.ifal.aluno.arestro.components.base.AppLayout
 import br.edu.ifal.aluno.arestro.screens.CartScreen
 import br.edu.ifal.aluno.arestro.screens.DashboardScreen
 import br.edu.ifal.aluno.arestro.screens.OnBoardingScreen
 import br.edu.ifal.aluno.arestro.screens.ProfileScreen
+import br.edu.ifal.aluno.arestro.screens.RestaurantDetailScreen
 import br.edu.ifal.aluno.arestro.screens.SearchScreen
 import kotlinx.serialization.Serializable
 
@@ -30,9 +32,12 @@ object ProfileRoute
 @Serializable
 object DashboardRoute
 
+@Serializable
+data class DetailsRoute(val restaurantId: Int)
+
 @Composable
 fun ArestroNavHost(navController: NavHostController) {
-    NavHost(navController = navController, startDestination = CartRoute) {
+    NavHost(navController = navController, startDestination = OnBoardingRoute) {
         composable<OnBoardingRoute> {
             OnBoardingScreen(
                 onNavigateToHomePage = {
@@ -45,7 +50,8 @@ fun ArestroNavHost(navController: NavHostController) {
             AppLayout(
                 onNavigateToProfileScreen = {
                     navController.navigate(ProfileRoute)
-                }
+                },
+                navController = navController
             )
         }
 
@@ -54,7 +60,7 @@ fun ArestroNavHost(navController: NavHostController) {
         }
 
         composable<SearchRoute> {
-            SearchScreen()
+            SearchScreen(navController)
         }
 
         composable<CartRoute> {
@@ -63,6 +69,14 @@ fun ArestroNavHost(navController: NavHostController) {
 
         composable<ProfileRoute> {
             ProfileScreen()
+        }
+
+        composable<DetailsRoute> { backStackEntry ->
+            val route = backStackEntry.toRoute<DetailsRoute>()
+            RestaurantDetailScreen(
+                navController = navController,
+                restaurantId = route.restaurantId
+            )
         }
     }
 }
